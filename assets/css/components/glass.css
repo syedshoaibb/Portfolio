@@ -1,0 +1,419 @@
+/*==========================================================
+    GLASS.CSS
+    The water-and-glass layer, loaded last so it can restyle
+    earlier components without touching them.
+
+      1. Water background  - still depth plus drifting code particles
+      2. Glass surfaces    - plain frosted panels, no shine
+      3. Waves             - thin water lines between sections
+      4. Ripples           - the ring that spreads on every click
+==========================================================*/
+
+/*----------------------------------------------------------
+    1. WATER BACKGROUND
+    Light falls from the top and fades into depth. Nothing
+    here glows or pulses; the only movement is the particles.
+----------------------------------------------------------*/
+
+.bg-water{
+    position:absolute;
+    inset:0;
+    /* The surface: bright water at the top, darker toward the bottom of the screen. */
+    background:linear-gradient(180deg,
+        var(--water-top) 0,
+        color-mix(in srgb,var(--water-top) 45%,var(--water-mid)) 22%,
+        var(--water-mid) 52%,
+        var(--water-deep) 100%);
+}
+
+/* Soft daylight from above; it fades as you go deeper. */
+
+.bg-water::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(80% 46% at 50% -6%,color-mix(in srgb,var(--glow) 13%,transparent),transparent 72%);
+    opacity:calc(1 - var(--depth,0) * .85);
+    transition:opacity .7s ease;
+}
+
+/* The deep: fades in over the surface as you scroll, so the page sinks from light into dark.
+   Only opacity changes, which the browser handles without repainting. */
+
+.bg-water::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,var(--water-deep) 0,var(--water-abyss) 100%);
+    opacity:var(--depth,0);
+    transition:opacity .7s ease;
+}
+
+.bg-particles{
+    position:absolute;
+    left:0;
+    top:0;
+    /* Width and height are set in pixels by particles.js, so the picture is never stretched. */
+}
+
+/* A fine film grain and a soft vignette so the depth reads as water, not as a flat fill. */
+
+.bg-grid{
+    inset:0;
+    opacity:.5;
+    background-image:
+        radial-gradient(130% 100% at 50% 0%,transparent 60%,rgba(2,16,28,.22) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+    background-size:auto,160px 160px;
+    -webkit-mask-image:none;
+            mask-image:none;
+}
+
+html[data-theme="light"] .bg-grid{
+    opacity:.3;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+    background-size:160px 160px;
+}
+
+/*----------------------------------------------------------
+    2. GLASS SURFACES
+----------------------------------------------------------*/
+
+.pcard,
+.resume-card,
+.mail,
+.detail-figure,
+.detail-facts{
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+            backdrop-filter:blur(18px) saturate(140%);
+    border:1px solid var(--glass-border);
+    box-shadow:
+        inset 0 1px 0 var(--glass-hi),
+        0 20px 50px -34px rgba(2,16,28,.5);
+}
+
+.detail-facts{
+    padding:1.5rem 1.75rem;
+    border-radius:var(--radius-lg);
+}
+
+.resume-card{
+    background:var(--glass-bg);
+}
+
+.mail-bar,
+.mail-foot{
+    background:color-mix(in srgb,var(--glass-bg-strong) 70%,transparent);
+}
+
+/* Chips, tags and buttons become small glass pills. */
+
+.chip,
+.project-tag,
+.resume-points li,
+.btn-secondary,
+.theme-toggle,
+.btn-nav,
+.nav-social,
+.icon-link,
+.scroll-top{
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(12px) saturate(140%);
+            backdrop-filter:blur(12px) saturate(140%);
+    border-color:var(--glass-border);
+    box-shadow:inset 0 1px 0 var(--glass-hi);
+}
+
+/* On the pale water the white glass edge disappears, so the pills keep a visible one. */
+
+html[data-theme="light"] .chip,
+html[data-theme="light"] .project-tag,
+html[data-theme="light"] .resume-points li,
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .theme-toggle,
+html[data-theme="light"] .nav-social,
+html[data-theme="light"] .icon-link,
+html[data-theme="light"] .scroll-top{
+    border-color:var(--line-strong);
+}
+
+.btn-secondary:hover,
+.btn-nav:hover,
+.nav-social:hover,
+.theme-toggle:hover,
+.scroll-top:hover{
+    border-color:var(--accent);
+}
+
+.btn-primary{
+    background:var(--accent);
+    box-shadow:none;
+}
+
+.btn-primary:hover{
+    background:var(--accent-strong);
+}
+
+/* Navigation: clear glass once you scroll. */
+
+.header.scrolled,
+.header.menu-open{
+    background:color-mix(in srgb,var(--bg) 55%,transparent);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);
+            backdrop-filter:blur(22px) saturate(160%);
+    box-shadow:inset 0 -1px 0 var(--glass-hi);
+}
+
+.scroll-progress{
+    background:linear-gradient(90deg,var(--glow),var(--glow-2));
+}
+
+/*----------------------------------------------------------
+    3. WAVES
+    Two thin water lines drifting in opposite directions
+    along the top of every section.
+----------------------------------------------------------*/
+
+.section + .section{
+    border-top:none;
+}
+
+/* A ribbon of fine contour lines that flows slowly between sections.
+   Five hairlines with different wavelengths and colours, faded at both
+   ends so it never looks like a ruled line. Every wavelength divides the
+   1200px tile, so the loop is seamless. */
+
+.section + .section::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:-60px;
+    height:120px;
+    pointer-events:none;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120' viewBox='0 0 1200 120'%3E%3Cpath d='M0 60Q300 14 600 60T1200 60' fill='none' stroke='%238DC3E3' stroke-width='1.2'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120' viewBox='0 0 1200 120'%3E%3Cpath d='M0 60Q150 28 300 60T600 60T900 60T1200 60' fill='none' stroke='%2362D2C6' stroke-width='1'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120' viewBox='0 0 1200 120'%3E%3Cpath d='M0 66Q300 100 600 66T1200 66' fill='none' stroke='%23B3DAF0' stroke-width='1.1'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='120' viewBox='0 0 1200 120'%3E%3Cpath d='M0 54Q100 40 200 54T400 54T600 54T800 54T1000 54T1200 54' fill='none' stroke='%238DC3E3' stroke-width='.8'/%3E%3C/svg%3E");
+    background-repeat:repeat-x;
+    background-size:1200px 120px,1200px 120px,1200px 120px,1200px 120px;
+    background-position:0 0,0 0,0 0,0 0;
+    opacity:.55;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
+    animation:ribbon 70s linear infinite;
+}
+
+.section + .section::after{
+    content:none;
+}
+
+html[data-theme="light"] .section + .section::before{
+    opacity:.4;
+}
+
+@keyframes ribbon{
+    to{ background-position:-1200px 0,1200px 0,-1200px 0,1200px 0; }
+}
+
+/*----------------------------------------------------------
+    4. RIPPLES
+----------------------------------------------------------*/
+
+.water-ring{
+    position:fixed;
+    z-index:99996;
+    width:14px;
+    height:14px;
+    margin:-7px 0 0 -7px;
+    border:1.5px solid color-mix(in srgb,var(--glow) 80%,transparent);
+    border-radius:50%;
+    pointer-events:none;
+    opacity:0;
+    animation:ring 1.3s cubic-bezier(.16,.8,.3,1) forwards;
+}
+
+.water-ring.second{
+    border-color:color-mix(in srgb,var(--glow-2) 70%,transparent);
+}
+
+@keyframes ring{
+    0%{ transform:scale(.4); opacity:.9; }
+    100%{ transform:scale(9); opacity:0; }
+}
+
+/* Headings settle like something surfacing: blur clears as they arrive. */
+
+html.js .reveal{
+    filter:blur(8px);
+}
+
+html.js .reveal.revealed{
+    filter:none;
+}
+
+html.js .reveal{
+    transition:
+        opacity .9s var(--ease-out) var(--d,0ms),
+        transform 1.1s var(--ease-out) var(--d,0ms),
+        filter .9s var(--ease-out) var(--d,0ms);
+}
+
+html.js .pcard.reveal{
+    transition:
+        opacity .9s var(--ease-out) var(--d,0ms),
+        transform 1.1s var(--ease-out) var(--d,0ms),
+        filter .9s var(--ease-out) var(--d,0ms),
+        border-color var(--normal),
+        box-shadow var(--normal);
+}
+
+@media (prefers-reduced-motion:reduce){
+
+    .section + .section::before{
+        animation:none;
+    }
+
+    html.js .reveal{
+        filter:none;
+    }
+
+}
+
+@media (max-width:640px){
+
+    /* The mirrored paper is heavy on small phones. */
+    .resume-paper{
+        -webkit-box-reflect:none;
+    }
+
+}
+
+/*----------------------------------------------------------
+    5. TOUCH SCREENS AND SMALL PHONES
+    Blur-behind (backdrop-filter) and always-moving layers are what
+    make a phone stutter. Here they are swapped for plain, slightly
+    more opaque glass that looks the same and costs nothing.
+----------------------------------------------------------*/
+
+/* Taps respond at once (no 300ms wait, no double-tap zoom) and show no grey flash. */
+
+a,
+button,
+.btn,
+[role="button"],
+summary{
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    -webkit-text-size-adjust:100%;
+            text-size-adjust:100%;
+}
+
+@media (hover:none),(pointer:coarse),(max-width:760px){
+
+    .pcard,
+    .resume-card,
+    .mail,
+    .detail-figure,
+    .detail-facts,
+    .chip,
+    .project-tag,
+    .resume-points li,
+    .btn-secondary,
+    .theme-toggle,
+    .btn-nav,
+    .nav-social,
+    .icon-link,
+    .scroll-top{
+        -webkit-backdrop-filter:none;
+                backdrop-filter:none;
+    }
+
+    .pcard,
+    .resume-card,
+    .mail,
+    .detail-figure,
+    .detail-facts{
+        background:color-mix(in srgb,var(--surface) 78%,transparent);
+    }
+
+    .header.scrolled,
+    .header.menu-open{
+        -webkit-backdrop-filter:none;
+                backdrop-filter:none;
+        background:color-mix(in srgb,var(--bg) 92%,transparent);
+    }
+
+    /* The film grain is a full-screen filtered layer; on a phone it is skipped. */
+    .bg-grid{
+        display:none;
+    }
+
+    /* The wavy ribbon between sections slides forever; on a phone it stays still. */
+    .section + .section::before{
+        animation:none;
+        opacity:.3;
+    }
+
+    /* Blur-in on every reveal is costly; the slide and fade stay. */
+    html.js .reveal{
+        filter:none;
+    }
+
+    html.js .reveal,
+    html.js .pcard.reveal,
+    html.js .cert.reveal{
+        transition:
+            opacity .7s var(--ease-out) var(--d,0ms),
+            transform .8s var(--ease-out) var(--d,0ms);
+    }
+
+    html.js .cert.reveal,
+    html.js .pcard.reveal{
+        transition:
+            opacity .7s var(--ease-out) var(--d,0ms),
+            transform .8s var(--ease-out) var(--d,0ms),
+            border-color var(--normal);
+    }
+
+    /* The name's one-time sheen repaints the big text every frame; skip it on phones. */
+    html.js .hero-title .ht-text{
+        animation:none;
+    }
+
+    /* A finger pressing on a card must scroll the page at once: no text selection or long-press
+       menu to wait for, and no sticky-hover repaint when a tap lets go. */
+    .pcard,
+    .cert,
+    .resume-card,
+    .chip,
+    .project-tag,
+    .btn{
+        -webkit-user-select:none;
+                user-select:none;
+        -webkit-touch-callout:none;
+        transition:none;
+    }
+
+    .pcard:hover,
+    .cert:hover{
+        box-shadow:none;
+    }
+
+    /* No hover glow follows a finger. */
+    .pcard::before,
+    .cert::before{
+        display:none;
+    }
+
+    .mail{
+        translate:none;
+    }
+
+}

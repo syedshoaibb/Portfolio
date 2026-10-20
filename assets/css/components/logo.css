@@ -1,0 +1,184 @@
+/*==========================================================
+    LOGO.CSS
+    The SMS mark: a chamfered badge, squared-off letters drawn
+    as one stroke, and a green "pass" dot, the same signal the
+    hero uses in its Authentication-Results lines.
+
+    Colours come from the theme tokens, so the mark follows the
+    light and dark themes. Motion only answers an action
+    (hover or keyboard focus) or plays once on the loading screen.
+==========================================================*/
+
+.logo{
+    display:inline-block;
+    flex:none;
+    width:46px;
+    height:46px;
+    border-radius:var(--radius-sm);
+    line-height:0;
+    transition:filter var(--normal);
+}
+
+.logo-mark{
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+
+.lm-frame{
+    fill:var(--accent);
+    fill-opacity:.08;
+    stroke:var(--accent);
+    stroke-width:2.5;
+    stroke-linejoin:bevel;
+    transition:fill-opacity var(--normal);
+}
+
+.lm-letters{
+    fill:none;
+    stroke:var(--text);
+    stroke-width:3;
+    stroke-linecap:square;
+    stroke-linejoin:bevel;
+}
+
+/* Each letter is its own path so each one draws cleanly (dash patterns restart per path).
+   The offset starts at 1.05, not 1, so no zero-length dash shows a stray dot. */
+
+.lm-letters path{
+    stroke-dasharray:1 2;
+    stroke-dashoffset:0;
+}
+
+.lm-dot{
+    fill:var(--pass);
+}
+
+.lm-ring{
+    fill:none;
+    stroke:var(--pass);
+    stroke-width:1.5;
+    opacity:0;
+    transform-box:fill-box;
+    transform-origin:center;
+}
+
+/* Hover and keyboard focus: the letters trace themselves again and the dot pings. */
+
+.logo:hover,
+.logo:focus-visible{
+    filter:drop-shadow(0 0 10px color-mix(in srgb,var(--accent) 45%,transparent));
+}
+
+.logo:hover .lm-frame,
+.logo:focus-visible .lm-frame{
+    fill-opacity:.2;
+}
+
+.logo:hover .lm-letters path,
+.logo:focus-visible .lm-letters path{
+    animation:logo-trace .6s cubic-bezier(.5,0,.2,1) backwards;
+}
+
+.logo:hover .lm-letters path:nth-child(2),
+.logo:focus-visible .lm-letters path:nth-child(2){
+    animation-delay:.1s;
+}
+
+.logo:hover .lm-letters path:nth-child(3),
+.logo:focus-visible .lm-letters path:nth-child(3){
+    animation-delay:.2s;
+}
+
+.logo:hover .lm-ring,
+.logo:focus-visible .lm-ring{
+    animation:logo-ping .9s ease-out;
+}
+
+/* Loading screen: the mark draws itself once. */
+
+.loader-mark{
+    width:92px;
+    height:92px;
+}
+
+html.js .loader-mark .lm-frame{
+    stroke-dasharray:1 2;
+    stroke-dashoffset:1.05;
+    fill-opacity:0;
+    animation:
+        logo-trace .55s cubic-bezier(.6,0,.2,1) forwards,
+        logo-fill .35s ease .5s forwards;
+}
+
+html.js .loader-mark .lm-letters path{
+    stroke-dashoffset:1.05;
+    animation:logo-trace .35s cubic-bezier(.5,0,.2,1) .25s forwards;
+}
+
+html.js .loader-mark .lm-letters path:nth-child(2){
+    animation-delay:.38s;
+}
+
+html.js .loader-mark .lm-letters path:nth-child(3){
+    animation-delay:.51s;
+}
+
+html.js .loader-mark .lm-dot{
+    opacity:0;
+    transform-box:fill-box;
+    transform-origin:center;
+    animation:logo-pop .3s cubic-bezier(.3,1.6,.5,1) .9s forwards;
+}
+
+html.js .loader-mark .lm-ring{
+    animation:logo-ping .8s ease-out .9s;
+}
+
+@keyframes logo-trace{
+    from{ stroke-dashoffset:1.05; }
+    to{ stroke-dashoffset:0; }
+}
+
+@keyframes logo-fill{
+    to{ fill-opacity:.08; }
+}
+
+@keyframes logo-pop{
+    from{ opacity:0; transform:scale(.2); }
+    to{ opacity:1; transform:scale(1); }
+}
+
+@keyframes logo-ping{
+    from{ opacity:.9; transform:scale(1); }
+    to{ opacity:0; transform:scale(2.4); }
+}
+
+@media (prefers-reduced-motion:reduce){
+
+    .logo:hover .lm-letters path,
+    .logo:focus-visible .lm-letters path,
+    .logo:hover .lm-ring,
+    .logo:focus-visible .lm-ring,
+    html.js .loader-mark .lm-frame,
+    html.js .loader-mark .lm-letters path,
+    html.js .loader-mark .lm-dot,
+    html.js .loader-mark .lm-ring{
+        animation:none;
+    }
+
+    html.js .loader-mark .lm-frame{
+        stroke-dashoffset:0;
+        fill-opacity:.08;
+    }
+
+    html.js .loader-mark .lm-letters path{
+        stroke-dashoffset:0;
+    }
+
+    html.js .loader-mark .lm-dot{
+        opacity:1;
+    }
+
+}

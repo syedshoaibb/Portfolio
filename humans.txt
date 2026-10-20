@@ -1,0 +1,10 @@
+/* TEAM */
+Developer: Syed Madanin Shoaib
+Contact: syedshoaib22a@gmail.com
+GitHub: https://github.com/syedshoaibb
+From: Bangarpet, Karnataka, India
+
+/* SITE */
+Last update: 2026/10/19
+Standards: HTML5, CSS3, ES2020
+Components: no frameworks, no build step

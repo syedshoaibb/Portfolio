@@ -1,0 +1,123 @@
+/*==========================================================
+    VARIABLES.CSS
+    One token set. Every other file uses ONLY these names.
+==========================================================*/
+
+:root{
+
+    color-scheme:dark;
+
+    /* Colour: deep water, with a muted sky blue for light */
+    --bg:#0A2233;
+    --surface:#11293C;
+    --surface-2:#163448;
+    --line:#22455C;
+    --line-strong:#356380;
+
+    --text:#EBF5FB;
+    --text-2:#BFD5E4;
+    --muted:#92AFC4;
+
+    --accent:#96CCEB;
+    --accent-strong:#BFE3F6;
+    --on-accent:#06202F;
+
+    /* The pointer light and ripples */
+    --glow:#9CD4F2;
+    --glow-2:#70DCD0;
+    --particle:#9CD4F2;
+
+    --pass:#5FD7A0;
+    --flag:#F2705F;
+
+    /* Type */
+    --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+    --fs-xs:.8125rem;
+    --fs-sm:.9375rem;
+    --fs-base:1.0625rem;
+    --fs-lg:1.25rem;
+    --fs-xl:1.625rem;
+    --fs-2xl:clamp(2rem,4.2vw,3.1rem);
+    --fs-display:clamp(2.9rem,7.2vw,5.9rem);
+
+    --fw-400:400;
+    --fw-500:500;
+    --fw-600:600;
+    --fw-700:700;
+
+    /* Shape */
+    --radius-sm:6px;
+    --radius:12px;
+    --radius-lg:18px;
+
+    /* Layout */
+    --container:1180px;
+    --nav-h:72px;
+
+    /* Motion */
+    --fast:.16s ease;
+    --normal:.3s ease;
+
+    --shadow:0 24px 60px -30px rgba(2,16,28,.55);
+
+    /* Glass and water */
+    --glass-bg:rgba(150,205,240,.08);
+    --glass-bg-strong:rgba(14,40,58,.62);
+    --glass-border:rgba(185,228,250,.20);
+    --glass-hi:rgba(200,236,252,.14);
+    --sheen:rgba(255,255,255,.04);
+    /* The water: light enters from the top and fades into depth. */
+    --water-top:#2B6E96;
+    --water-mid:#184B6D;
+    --water-deep:#0C2739;
+    --water-abyss:#071B2A;
+
+    /* The name: light at the top of each letter, settling into the water below. */
+    --name-a:#FFFFFF;
+    --name-b:#9CD0EE;
+    --name-sheen:rgba(255,255,255,.85);
+}
+
+html[data-theme="light"]{
+
+    color-scheme:light;
+
+    --bg:#EDF5FA;
+    --surface:#FAFDFF;
+    --surface-2:#E1EDF5;
+    --line:#CFE0EB;
+    --line-strong:#A3BFD1;
+
+    --text:#0D1A25;
+    --text-2:#324858;
+    --muted:#587184;
+
+    --accent:#1D6A94;
+    --accent-strong:#12506F;
+    --on-accent:#FFFFFF;
+
+    --glow:#3C93C4;
+    --glow-2:#1B9C93;
+    --particle:#2F86C8;
+
+    --pass:#12795A;
+    --flag:#C23B2B;
+
+    --shadow:0 24px 60px -30px rgba(13,40,60,.30);
+
+    --glass-bg:rgba(255,255,255,.50);
+    --glass-bg-strong:rgba(255,255,255,.78);
+    --glass-border:rgba(255,255,255,.85);
+    --glass-hi:rgba(255,255,255,.90);
+    --sheen:rgba(255,255,255,.35);
+    --water-top:#CFE6F5;
+    --water-mid:#E4F0F8;
+    --water-deep:#EEF6FB;
+    --water-abyss:#DCEAF4;
+
+    --name-a:#0A2C44;
+    --name-b:#2478A6;
+    --name-sheen:rgba(255,255,255,.9);
+}

@@ -1,0 +1,186 @@
+/*==========================================================
+    FOOTER.CSS
+    One footer for the whole site: a brand column and three
+    titled link columns, then a single legal line.
+==========================================================*/
+
+.footer{
+    position:relative;
+    z-index:1;
+    margin-top:clamp(2rem,5vw,4rem);
+    padding-top:clamp(3rem,6vw,4.75rem);
+    padding-bottom:1.75rem;
+    background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg) 70%,#000) 60%);
+}
+
+/* A hairline of light along the top edge. */
+
+.footer::before{
+    content:"";
+    position:absolute;
+    inset:0 0 auto 0;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--glow) 28%,var(--accent) 60%,transparent);
+    opacity:.55;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(0,1fr));
+    gap:2.5rem clamp(1.5rem,4vw,4rem);
+}
+
+.footer-name{
+    margin-bottom:.8rem;
+    font-size:clamp(1.4rem,2.4vw,1.85rem);
+    font-weight:var(--fw-700);
+    letter-spacing:-.03em;
+    line-height:1.1;
+    color:var(--text);
+}
+
+.footer-blurb{
+    max-width:34ch;
+    margin-bottom:1.25rem;
+    font-size:var(--fs-sm);
+    line-height:1.65;
+    color:var(--text-2);
+}
+
+.footer-status{
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+    margin-bottom:1rem;
+    padding:.3rem .75rem;
+    border:1px solid var(--glass-border,var(--line-strong));
+    border-radius:999px;
+    background:var(--glass-bg,transparent);
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    color:var(--text);
+}
+
+.footer-status i{
+    width:.5rem;
+    height:.5rem;
+    border-radius:50%;
+    background:var(--pass);
+    animation:pulse 2.4s ease-out infinite;
+}
+
+.footer-mail{
+    display:block;
+    width:max-content;
+    max-width:100%;
+    font-family:var(--font-mono);
+    font-size:var(--fs-sm);
+    color:var(--text);
+    overflow-wrap:anywhere;
+    background:linear-gradient(var(--glow),var(--glow)) left bottom/0% 1px no-repeat;
+    padding-bottom:.2rem;
+    transition:background-size .5s var(--ease-out,ease),color var(--fast);
+}
+
+.footer-mail:hover{
+    color:var(--glow);
+    background-size:100% 1px;
+}
+
+.footer-mail span,
+.footer-col a span{
+    display:inline-block;
+    color:var(--muted);
+    transition:transform var(--normal),color var(--fast);
+}
+
+.footer-mail:hover span,
+.footer-col a:hover span{
+    color:var(--glow);
+    transform:translate(2px,-2px);
+}
+
+/* Titled columns. */
+
+.footer-col h2{
+    margin-bottom:1.1rem;
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    line-height:1.2;
+    color:var(--muted);
+}
+
+.footer-col ul{
+    display:grid;
+    gap:.7rem;
+}
+
+.footer-col a{
+    display:inline-block;
+    font-size:var(--fs-sm);
+    color:var(--text-2);
+    transition:color var(--fast),transform var(--normal);
+}
+
+.footer-col a:hover{
+    color:var(--text);
+    transform:translateX(4px);
+}
+
+/* The one legal line. */
+
+.footer-bottom{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:.75rem 2rem;
+    margin-top:clamp(2.5rem,5vw,3.75rem);
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+    font-size:var(--fs-xs);
+    color:var(--muted);
+}
+
+.footer-bottom p{
+    max-width:none;
+    font-size:var(--fs-xs);
+    color:var(--muted);
+}
+
+.footer-legal{
+    display:flex;
+    gap:1.5rem;
+}
+
+.footer-legal a{
+    color:var(--text-2);
+    transition:color var(--fast);
+}
+
+.footer-legal a:hover{
+    color:var(--glow);
+}
+
+@media (max-width:900px){
+
+    .footer-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .footer-brand{
+        grid-column:1 / -1;
+    }
+
+}
+
+@media (max-width:560px){
+
+    .footer-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}

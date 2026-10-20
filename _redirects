@@ -1,0 +1,11 @@
+# Short, shareable URLs.
+/resume    /pages/resume.html    200
+/privacy   /pages/privacy.html   200
+/cv        /assets/resume/Syed_Madanin_Shoaib_Resume.pdf   302
+
+# Project files that are not part of the public site.
+# The "!" forces a 404 even though the file exists.
+/README.md      /404.html   404!
+/LICENSE        /404.html   404!
+/.vscode/*      /404.html   404!
+/.git/*         /404.html   404!

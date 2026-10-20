@@ -1,0 +1,62 @@
+/*==========================================================
+    STYLE.CSS
+    Last file loaded: small global pieces and page-level touches.
+==========================================================*/
+
+img{
+    -webkit-user-drag:none;
+}
+
+/* Back to top */
+
+.scroll-top{
+    position:fixed;
+    right:1.25rem;
+    bottom:1.25rem;
+    z-index:900;
+    display:grid;
+    place-items:center;
+    width:44px;
+    height:44px;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    background:var(--surface);
+    color:var(--text);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity var(--normal),transform var(--normal),visibility var(--normal),border-color var(--fast),color var(--fast);
+}
+
+.scroll-top.show{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+}
+
+.scroll-top:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+}
+
+/* Print: used by the resume page */
+
+@media print{
+
+    .header,
+    .footer,
+    .scroll-top,
+    .background-wrapper,
+    #cursor,
+    #cursor-blur,
+    #loader,
+    .no-print{
+        display:none !important;
+    }
+
+    body{
+        background:#fff;
+        color:#000;
+    }
+
+}

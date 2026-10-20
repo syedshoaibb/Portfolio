@@ -1,0 +1,520 @@
+/*==========================================================
+    CARDS.CSS
+    About, skills, certificates, resume, contact.
+    Plain lists with hairlines instead of a grid of boxes.
+==========================================================*/
+
+/*----------------------------------------------------------
+    ABOUT
+----------------------------------------------------------*/
+
+.about-points{
+    border-top:1px solid var(--line);
+}
+
+.about-point{
+    padding:1.5rem 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    gap:.4rem;
+}
+
+.about-point h3{
+    font-size:var(--fs-lg);
+    letter-spacing:-.015em;
+}
+
+.facts{
+    margin-top:2.5rem;
+    display:grid;
+    gap:1.25rem;
+}
+
+.fact{
+    display:grid;
+    grid-template-columns:8rem minmax(0,1fr);
+    gap:1rem;
+}
+
+.fact dt{
+    color:var(--muted);
+    font-size:var(--fs-sm);
+}
+
+.fact dd{
+    color:var(--text);
+    font-size:var(--fs-sm);
+    line-height:1.55;
+}
+
+/*----------------------------------------------------------
+    SKILLS
+----------------------------------------------------------*/
+
+.skills-list{
+    border-top:1px solid var(--line);
+}
+
+.skill-row{
+    display:grid;
+    grid-template-columns:11rem minmax(0,1fr);
+    gap:1rem 2rem;
+    padding:1.15rem 0;
+    border-bottom:1px solid var(--line);
+}
+
+.skill-row dt{
+    color:var(--muted);
+    font-size:var(--fs-sm);
+    padding-top:.15rem;
+}
+
+.skill-row dd{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.45rem .5rem;
+}
+
+.chip{
+    display:inline-block;
+    padding:.28rem .7rem;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    color:var(--text);
+    line-height:1.4;
+}
+
+.skill-row.learning .chip{
+    border-style:dashed;
+    color:var(--text-2);
+}
+
+/*----------------------------------------------------------
+    RESUME CARD
+----------------------------------------------------------*/
+
+.resume-card{
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,15rem) minmax(0,1fr);
+    gap:2rem clamp(2rem,5vw,4.5rem);
+    align-items:center;
+    padding:clamp(1.75rem,4vw,3.25rem);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius-lg);
+    background:
+        radial-gradient(60rem 22rem at 100% 0%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 60%),
+        var(--surface);
+    overflow:hidden;
+}
+
+/* A paper-style preview of the resume. */
+
+.resume-preview{
+    display:grid;
+    place-items:center;
+    padding:1.25rem 0;
+}
+
+.resume-paper{
+    position:relative;
+    display:grid;
+    gap:.5rem;
+    align-content:start;
+    width:100%;
+    max-width:13.5rem;
+    aspect-ratio:3/4;
+    padding:1.25rem 1.1rem;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius-sm);
+    background:var(--bg);
+    box-shadow:var(--shadow);
+    transform:rotate(-3deg);
+    transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.resume-paper::after{
+    content:"";
+    position:absolute;
+    inset:auto -1px -1px auto;
+    width:2rem;
+    height:2rem;
+    background:linear-gradient(135deg,transparent 50%,var(--surface-2) 50%);
+    border-top-left-radius:6px;
+}
+
+.resume-card:hover .resume-paper{
+    transform:rotate(0deg) translateY(-4px);
+}
+
+.rp-name{
+    font-size:.78rem;
+    font-weight:var(--fw-700);
+    color:var(--text);
+    letter-spacing:-.01em;
+}
+
+.rp-role{
+    font-size:.58rem;
+    color:var(--muted);
+    line-height:1.3;
+}
+
+.rp-rule{
+    height:2px;
+    margin:.2rem 0 .3rem;
+    background:var(--accent);
+}
+
+.rp-head{
+    margin-top:.35rem;
+    font-family:var(--font-mono);
+    font-size:.56rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+}
+
+.rp-line{
+    height:.3rem;
+    border-radius:99px;
+    background:var(--line-strong);
+}
+
+.rp-line.mid{ width:75%; }
+.rp-line.short{ width:55%; }
+
+.resume-kicker{
+    margin-bottom:.7rem;
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+}
+
+.resume-card h2{
+    max-width:18ch;
+    margin-bottom:.9rem;
+    text-wrap:balance;
+}
+
+.resume-points{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.45rem;
+    margin:1.4rem 0 1.75rem;
+}
+
+.resume-points li{
+    padding:.28rem .75rem;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    color:var(--text-2);
+}
+
+.resume-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.75rem;
+}
+
+/*----------------------------------------------------------
+    CERTIFICATES
+----------------------------------------------------------*/
+
+.certificate-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:1.25rem;
+}
+
+.cert{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:.55rem;
+    min-height:15rem;
+    padding:1.5rem;
+    border:1px solid var(--glass-border,var(--line));
+    border-radius:var(--radius-lg);
+    background:
+        linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.01) 55%),
+        var(--glass-bg,var(--surface));
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+            backdrop-filter:blur(16px) saturate(140%);
+    box-shadow:inset 0 1px 0 var(--glass-hi,transparent);
+    overflow:hidden;
+    isolation:isolate;
+    transition:border-color var(--normal),box-shadow var(--normal);
+}
+
+/* Light that follows the pointer. Colour only: nothing moves under the cursor. */
+
+.cert::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    opacity:0;
+    pointer-events:none;
+    background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--glow) 10%,transparent),transparent 62%);
+    transition:opacity var(--normal);
+}
+
+.cert:hover{
+    border-color:color-mix(in srgb,var(--glow) 50%,var(--line));
+}
+
+.cert:hover::before{
+    opacity:1;
+}
+
+.cert-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:1.1rem;
+}
+
+.cert-icon{
+    display:grid;
+    place-items:center;
+    width:2.8rem;
+    height:2.8rem;
+    border:1px solid color-mix(in srgb,var(--glow) 45%,var(--line-strong));
+    border-radius:var(--radius);
+    color:var(--glow);
+    background:color-mix(in srgb,var(--glow) 9%,transparent);
+}
+
+.cert-icon svg{
+    width:1.4rem;
+    height:1.4rem;
+}
+
+.cert-no{
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    letter-spacing:.08em;
+    color:var(--muted);
+}
+
+.cert h3{
+    font-size:var(--fs-lg);
+    line-height:1.25;
+    letter-spacing:-.02em;
+    text-wrap:balance;
+}
+
+.cert .org{
+    color:var(--text-2);
+    font-size:var(--fs-sm);
+}
+
+.cert-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:.75rem;
+    margin-top:auto;
+    padding-top:1rem;
+    border-top:1px solid var(--line);
+}
+
+.cert-done{
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    color:var(--text-2);
+}
+
+.cert-done::before{
+    content:"";
+    width:.5rem;
+    height:.5rem;
+    border-radius:50%;
+    background:var(--pass);
+}
+
+.cert-tag{
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--accent);
+}
+
+@media (max-width:980px){
+
+    .certificate-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media (max-width:620px){
+
+    .certificate-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cert{
+        min-height:0;
+    }
+
+}
+
+/*----------------------------------------------------------
+    CONTACT
+----------------------------------------------------------*/
+
+.contact-email{
+    display:inline-block;
+    font-size:clamp(1.5rem,4.2vw,3.1rem);
+    font-weight:var(--fw-700);
+    letter-spacing:-.035em;
+    line-height:1.1;
+    color:var(--text);
+    overflow-wrap:anywhere;
+    text-decoration:underline;
+    text-decoration-color:var(--accent);
+    text-decoration-thickness:2px;
+    text-underline-offset:.2em;
+    transition:color var(--fast);
+}
+
+.contact-email:hover{
+    color:var(--accent);
+}
+
+.contact-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.75rem;
+    margin-top:2.25rem;
+}
+
+.copy-status{
+    min-height:1.4em;
+    margin-top:.9rem;
+    color:var(--pass);
+    font-size:var(--fs-sm);
+}
+
+/*----------------------------------------------------------
+    RESUME PAGE
+----------------------------------------------------------*/
+
+.resume-doc{
+    max-width:860px;
+}
+
+.resume-head{
+    padding-bottom:1.5rem;
+    margin-bottom:2rem;
+    border-bottom:1px solid var(--line-strong);
+}
+
+.resume-head h2{
+    margin-bottom:.35rem;
+}
+
+.resume-head p{
+    font-size:var(--fs-sm);
+}
+
+.r-section{
+    margin-bottom:2.5rem;
+}
+
+.r-section > h3{
+    font-size:var(--fs-lg);
+    padding-bottom:.6rem;
+    margin-bottom:1.25rem;
+    border-bottom:1px solid var(--line);
+}
+
+.r-item + .r-item{
+    margin-top:2rem;
+}
+
+.r-item{
+    display:grid;
+    gap:.5rem;
+}
+
+.r-top{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:.25rem 1.5rem;
+}
+
+.r-top h4{
+    font-size:var(--fs-base);
+    letter-spacing:-.01em;
+}
+
+.r-top span{
+    color:var(--muted);
+    font-size:var(--fs-sm);
+}
+
+.r-stack{
+    color:var(--accent);
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-500);
+}
+
+.r-skills{
+    display:grid;
+    gap:.7rem;
+}
+
+.r-skills div{
+    display:grid;
+    grid-template-columns:11rem minmax(0,1fr);
+    gap:.25rem 1.5rem;
+}
+
+.r-skills dt{
+    color:var(--muted);
+    font-size:var(--fs-sm);
+}
+
+.r-skills dd{
+    color:var(--text);
+    font-size:var(--fs-sm);
+}
+
+@media (max-width:640px){
+
+    .r-skills div{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media print{
+
+    .resume-doc,
+    .resume-doc *{
+        color:#000 !important;
+        background:none !important;
+        border-color:#999 !important;
+    }
+
+    .section,
+    .detail-hero{
+        padding:0 !important;
+    }
+
+}

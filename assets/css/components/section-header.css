@@ -1,0 +1,29 @@
+/*==========================================================
+    SECTION-HEADER.CSS
+==========================================================*/
+
+.section-header{
+    display:grid;
+    gap:1.1rem;
+    margin-bottom:clamp(2.5rem,5vw,4rem);
+    max-width:46rem;
+}
+
+.section-title{
+    max-width:20ch;
+    text-wrap:balance;
+}
+
+.section-description{
+    font-size:var(--fs-lg);
+    line-height:1.55;
+    max-width:52ch;
+}
+
+/* Header that sits inside a .split column */
+
+.split > .section-header{
+    margin-bottom:0;
+    position:sticky;
+    top:calc(var(--nav-h) + 2rem);
+}

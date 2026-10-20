@@ -1,0 +1,166 @@
+/*==========================================================
+    LOADER.CSS
+    A short, quiet intro: the mark draws itself, the name settles
+    in under it, a hairline fills, then the screen lifts away like
+    a water surface and the hero rises in behind it.
+
+    Shown only when JavaScript is running, so it can never trap a
+    visitor on a blank screen. Only transform and opacity move.
+==========================================================*/
+
+html:not(.js) #loader,
+html.no-loader #loader{
+    display:none !important;
+}
+
+/* While it is up: no scrolling behind it, and the hero waits (loader-init.js / loader.js). */
+
+html.is-loading{
+    overflow:hidden;
+    overscroll-behavior:none;
+}
+
+html.is-loading .hero-hello,
+html.is-loading .ht-line,
+html.is-loading .ht-text,
+html.is-loading .hero-tagline,
+html.is-loading .hero-actions,
+html.is-loading .mail-line,
+html.is-loading .mail-auth,
+html.is-loading .mail-foot{
+    animation-play-state:paused;
+}
+
+html.js #loader{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    /* The large viewport: still covers the screen after a phone's address bar slides away. */
+    height:100lvh;
+    z-index:99999;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    touch-action:none;
+    overscroll-behavior:none;
+    user-select:none;
+    -webkit-user-select:none;
+    /* Safety net: if scripts fail, the screen removes itself after 6 seconds. */
+    animation:loader-failsafe 0s linear 6s forwards;
+}
+
+@keyframes loader-failsafe{
+    to{ visibility:hidden; pointer-events:none; }
+}
+
+/* The sheet is what lifts away. Its curved lower edge reads as a water surface. */
+
+.loader-sheet{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:calc(100% + 9vh);
+    background:var(--bg);
+    border-radius:0 0 50% 50% / 0 0 9vh 9vh;
+    will-change:transform;
+}
+
+.loader-inner{
+    position:relative;
+    display:grid;
+    justify-items:center;
+    gap:1.15rem;
+}
+
+.loader-name{
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-500);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--text-2);
+    opacity:0;
+    animation:loader-in .6s var(--ease-out,cubic-bezier(.22,1,.36,1)) .95s forwards;
+}
+
+.loader-bar{
+    position:relative;
+    display:block;
+    width:7.5rem;
+    height:2px;
+    border-radius:2px;
+    background:color-mix(in srgb,var(--accent) 18%,transparent);
+    overflow:hidden;
+    opacity:0;
+    animation:loader-in .5s ease 1s forwards;
+}
+
+.loader-bar i{
+    position:absolute;
+    inset:0;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left center;
+    animation:loader-fill 1.35s cubic-bezier(.45,.05,.2,1) .15s forwards;
+}
+
+@keyframes loader-in{
+    from{ opacity:0; transform:translateY(6px); }
+    to{ opacity:1; transform:none; }
+}
+
+@keyframes loader-fill{
+    to{ transform:scaleX(1); }
+}
+
+/* Leaving: the mark and name drift up and fade, the sheet lifts off the top. */
+
+html.js #loader.is-done{
+    pointer-events:none;
+    visibility:hidden;
+    transition:visibility 0s linear .95s;
+}
+
+html.js #loader.is-done .loader-inner{
+    opacity:0;
+    transform:translateY(-14px);
+    transition:opacity .3s ease,transform .5s var(--ease-out,cubic-bezier(.22,1,.36,1));
+}
+
+html.js #loader.is-done .loader-sheet{
+    transform:translateY(-100%);
+    transition:transform .85s cubic-bezier(.76,0,.24,1) .08s;
+}
+
+@media (prefers-reduced-motion:reduce){
+
+    html.js #loader{
+        animation:none;
+    }
+
+    .loader-name,
+    .loader-bar{
+        opacity:1;
+        animation:none;
+    }
+
+    .loader-bar i{
+        transform:none;
+        animation:none;
+    }
+
+    html.js #loader.is-done{
+        opacity:0;
+        transition:opacity .2s ease,visibility 0s linear .2s;
+    }
+
+    html.js #loader.is-done .loader-inner,
+    html.js #loader.is-done .loader-sheet{
+        transform:none;
+        transition:none;
+    }
+
+}

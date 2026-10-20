@@ -1,0 +1,76 @@
+/*==========================================================
+    TYPOGRAPHY.CSS
+==========================================================*/
+
+h1,
+h2,
+h3,
+h4{
+    color:var(--text);
+    font-weight:var(--fw-700);
+    line-height:1.1;
+    letter-spacing:-.03em;
+}
+
+h1{
+    font-size:var(--fs-display);
+    line-height:.98;
+    letter-spacing:-.045em;
+}
+
+h2{
+    font-size:var(--fs-2xl);
+    letter-spacing:-.035em;
+}
+
+h3{
+    font-size:var(--fs-xl);
+    letter-spacing:-.025em;
+}
+
+h4{
+    font-size:var(--fs-lg);
+    letter-spacing:-.015em;
+}
+
+p{
+    color:var(--text-2);
+    line-height:1.65;
+    max-width:62ch;
+}
+
+strong{
+    color:var(--text);
+    font-weight:var(--fw-600);
+}
+
+small{
+    font-size:var(--fs-xs);
+}
+
+code,
+.mono{
+    font-family:var(--font-mono);
+    font-size:.92em;
+}
+
+.lede{
+    font-size:var(--fs-lg);
+    line-height:1.55;
+    color:var(--text-2);
+    max-width:54ch;
+}
+
+.link{
+    color:var(--text);
+    text-decoration:underline;
+    text-decoration-color:var(--line-strong);
+    text-underline-offset:.25em;
+    text-decoration-thickness:1px;
+    transition:color var(--fast),text-decoration-color var(--fast);
+}
+
+.link:hover{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+}

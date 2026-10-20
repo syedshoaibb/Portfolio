@@ -1,0 +1,192 @@
+/*==========================================================
+    RESPONSIVE.CSS
+==========================================================*/
+
+/*----------------------------------------------------------
+    TABLETS AND SMALL LAPTOPS
+----------------------------------------------------------*/
+
+@media (max-width:1024px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .mail{
+        max-width:560px;
+    }
+
+    .hero-title{
+        font-size:clamp(2.6rem,10.5vw,5.5rem);
+    }
+
+    .hero-content{
+        gap:2rem;
+    }
+
+    .split{
+        grid-template-columns:1fr;
+    }
+
+    .split > .section-header{
+        position:static;
+    }
+
+    .project-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .resume-card{
+        grid-template-columns:minmax(0,11rem) minmax(0,1fr);
+        align-items:center;
+    }
+
+}
+
+/*----------------------------------------------------------
+    NAVIGATION COLLAPSES
+----------------------------------------------------------*/
+
+@media (max-width:860px){
+
+    .menu-toggle{
+        display:inline-grid;
+    }
+
+    .btn-nav{
+        display:none;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:var(--nav-h);
+        left:0;
+        right:0;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+        padding:.5rem 1.25rem 1.25rem;
+        background:var(--bg);
+        border-bottom:1px solid var(--line);
+        transform:translateY(-8px);
+        opacity:0;
+        visibility:hidden;
+        transition:opacity var(--normal),transform var(--normal),visibility var(--normal);
+    }
+
+    .nav-links.open{
+        opacity:1;
+        visibility:visible;
+        transform:none;
+    }
+
+    .nav-links a{
+        padding:.95rem .25rem;
+        border-bottom:1px solid var(--line);
+        border-radius:0;
+        font-size:var(--fs-base);
+    }
+
+    .nav-links li:last-child a{
+        border-bottom:none;
+    }
+
+    .nav-links a.active::after{
+        display:none;
+    }
+
+    .nav-links a.active{
+        color:var(--accent);
+    }
+
+}
+
+/*----------------------------------------------------------
+    PHONES
+----------------------------------------------------------*/
+
+@media (max-width:640px){
+
+    .container{
+        width:min(100% - 2rem,var(--container));
+    }
+
+    .hero-description,
+    .section-description,
+    .detail-summary,
+    .lede{
+        font-size:var(--fs-base);
+    }
+
+    .project-grid{
+        grid-template-columns:1fr;
+    }
+
+    .resume-card{
+        grid-template-columns:1fr;
+    }
+
+    .resume-preview{
+        justify-items:start;
+        padding:0;
+    }
+
+    .resume-paper{
+        max-width:10rem;
+    }
+
+    .hero-actions .btn,
+    .resume-actions .btn,
+    .contact-actions .btn{
+        flex:1 1 100%;
+    }
+
+    .mail-line{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .mail-line dt{
+        font-size:.75rem;
+    }
+
+    .fact,
+    .skill-row{
+        grid-template-columns:1fr;
+        gap:.3rem;
+    }
+
+    .detail-overview{
+        grid-template-columns:1fr;
+    }
+
+    .detail-figure{
+        max-width:260px;
+    }
+
+    .certificate-row{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+    }
+
+}
+
+/*----------------------------------------------------------
+    SMALL PHONES
+    The stepped name needs a little less room at 360px and under.
+----------------------------------------------------------*/
+
+@media (max-width:400px){
+
+    .hero-title{
+        font-size:clamp(2.05rem,11.4vw,2.6rem);
+    }
+
+    .ht-second{
+        margin-left:.7em;
+    }
+
+}

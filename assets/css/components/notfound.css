@@ -1,0 +1,91 @@
+/*==========================================================
+    NOTFOUND.CSS
+    The 404 page.
+==========================================================*/
+
+.nf{
+    display:grid;
+    align-items:center;
+    min-height:calc(100svh - 220px);
+    padding-top:calc(var(--nav-h) + clamp(2rem,5vw,4rem));
+    padding-bottom:clamp(3rem,6vw,5rem);
+}
+
+.nf-inner{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    align-items:center;
+    gap:clamp(1.5rem,5vw,4.5rem);
+}
+
+.nf-code{
+    font-size:clamp(6rem,19vw,15rem);
+    font-weight:var(--fw-700);
+    line-height:.85;
+    letter-spacing:-.07em;
+    background:linear-gradient(160deg,var(--glow) 0%,var(--accent) 70%);
+    -webkit-background-clip:text;
+            background-clip:text;
+    -webkit-text-fill-color:transparent;
+    opacity:.9;
+    user-select:none;
+}
+
+.nf-kicker{
+    margin-bottom:.8rem;
+    font-family:var(--font-mono);
+    font-size:var(--fs-sm);
+    letter-spacing:.04em;
+    color:var(--glow);
+}
+
+.nf-title{
+    margin-bottom:1rem;
+    font-size:clamp(1.9rem,4.4vw,3rem);
+    line-height:1.05;
+    letter-spacing:-.04em;
+}
+
+.nf-text{
+    margin-bottom:1.4rem;
+    max-width:44ch;
+}
+
+.nf-trace{
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.6rem;
+    max-width:100%;
+    margin-bottom:2rem;
+    padding:.5rem .85rem;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius-sm);
+    background:var(--glass-bg);
+    font-family:var(--font-mono);
+    font-size:var(--fs-xs);
+    color:var(--text-2);
+}
+
+.nf-trace span{ color:var(--muted); }
+.nf-trace b{ color:var(--flag); font-weight:var(--fw-500); }
+
+.nf-trace code{
+    max-width:34ch;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--text);
+}
+
+@media (max-width:720px){
+
+    .nf-inner{
+        grid-template-columns:1fr;
+    }
+
+    .nf-code{
+        font-size:clamp(5.5rem,30vw,9rem);
+    }
+
+}
